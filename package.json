@@ -1,14 +1,8 @@
 {
-  "name": "temporal-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "backend-temp",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec npx babel-node src/index.js"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

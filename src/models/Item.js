@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-const schema_item = new Schema({
+const schema_item = new mongoose.Schema({
     descripcion: String,
     marca: String,
     modelo: String,
@@ -11,4 +11,4 @@ const schema_item = new Schema({
     versionKey: false
 });
 
-export default model('Item', schema_item);
+export default mongoose.model('Item', schema_item);

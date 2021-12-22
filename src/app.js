@@ -1,10 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import './database';
-import './config';
 
-import routerItem from './routes/RouterItem';
+import ConnectToDatabase from './ConnectToDatabase';
+import RouterItem from './routes/RouterItem';
+
+const newConnectToDatabase = new ConnectToDatabase();
+newConnectToDatabase.connectToMongoDB();
 
 const app = express();
 
@@ -13,6 +15,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/item', routerItem);
+app.use('/item', RouterItem);
 
 export default app;
