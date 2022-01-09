@@ -5,8 +5,11 @@ const schema_item = new mongoose.Schema({
     marca: String,
     modelo: String,
     nombre: { type: String, required: true, unique: true },
-    tipo: String,
-    unidad_de_medida: String
+    tipo: { type: String, required: true },
+    unidad_de_medida: { type: String, required: true },
+    stock: {
+        cantidad: Number
+    }
 }, {
     versionKey: false
 });
