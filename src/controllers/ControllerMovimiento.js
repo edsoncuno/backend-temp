@@ -1,10 +1,39 @@
 import Movimiento from '../models/Movimiento';
 import Item from '../models/Item';
 
+const formatearFecha = (date) => {
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    if (day <= 9) {
+        day = '0' + day;
+    }
+    if (month <= 9) {
+        month = '0' + month;
+    }
+    return day + '/' + month + '/' + date.getFullYear();
+};
+
 export const getMovimientos = async (req, res) => {
     try {
-        const movimientos = await Movimiento.find().sort({ fecha_de_registro: -1 });
-        res.json(movimientos);
+        let movimientos = await Movimiento.find().sort({ fecha_de_registro: -1 });
+        let newMovimientos = [];
+        for (let i = 0; i < movimientos.length; i++) {
+            newMovimientos.push({
+                _id: movimientos[i]._id,
+                tipo: movimientos[i].tipo,
+                item_id: movimientos[i].item_id,
+                stock_actual: movimientos[i].stock_actual,
+                cantidad: movimientos[i].cantidad,
+                nombre: movimientos[i].nombre,
+                unidad_de_medida: movimientos[i].unidad_de_medida,
+                fecha_de_registro: formatearFecha(movimientos[i].fecha_de_registro),
+                proveedor: movimientos[i].proveedor,
+                precio_de_compra_por_unidad: movimientos[i].precio_de_compra_por_unidad,
+                precio_de_compra_total: movimientos[i].precio_de_compra_total,
+                descripcion: movimientos[i].descripcion
+            });
+        }
+        res.json(newMovimientos);
     } catch (error) {
         res.json({ error: true, name: error.name, message: error.message });
     }
@@ -61,7 +90,7 @@ export const postMovimiento = async (req, res) => {
         // definir fecha de registro
         movimiento.fecha_de_registro = new Date();
         // definir precio de compra total
-        movimiento.precio_de_compra_total = movimiento.precio_de_compra_por_unidad * movimiento.cantidad;
+        movimiento.precio_de_compra_total = Number(movimiento.precio_de_compra_por_unidad * movimiento.cantidad).toFixed(2);
         // ahora guardo el movimiento
         const newMovimiento = new Movimiento(movimiento);
         await newMovimiento.save();
