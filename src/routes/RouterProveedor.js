@@ -1,9 +1,9 @@
-import { Router } from 'express';
-import { postProveedor } from '../controllers/ControllerProveedor';
-import { getProveedores } from '../controllers/ControllerProveedor';
-import { getProveedor } from '../controllers/ControllerProveedor';
-import { deleteProveedor } from '../controllers/ControllerProveedor';
-import { putProveedor } from '../controllers/ControllerProveedor';
+const { Router } = require('express');
+const { postProveedor } = require('../controllers/ControllerProveedor');
+const { getProveedores } = require('../controllers/ControllerProveedor');
+const { getProveedor } = require('../controllers/ControllerProveedor');
+const { deleteProveedor } = require('../controllers/ControllerProveedor');
+const { putProveedor } = require('../controllers/ControllerProveedor');
 
 const routerProveedor = Router();
 
@@ -13,4 +13,4 @@ routerProveedor.get('/:id', getProveedor);
 routerProveedor.delete('/:id', deleteProveedor);
 routerProveedor.put('/:id', putProveedor);
 
-export default routerProveedor;
+module.exports = routerProveedor;

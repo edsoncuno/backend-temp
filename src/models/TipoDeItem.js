@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema_tipo_de_item = new mongoose.Schema({
     nombre: String
@@ -6,4 +6,4 @@ const schema_tipo_de_item = new mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model('TipoDeItem', schema_tipo_de_item);
+module.exports = mongoose.model('TipoDeItem', schema_tipo_de_item);

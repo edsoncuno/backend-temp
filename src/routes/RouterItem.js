@@ -1,5 +1,9 @@
-import { Router } from 'express';
-import { getItems, getItem, postItem, putItem, deleteItem } from '../controllers/ControllerItem';
+const { Router } = require('express');
+const { getItems } = require('../controllers/ControllerItem');
+const { getItem } = require('../controllers/ControllerItem');
+const { postItem } = require('../controllers/ControllerItem');
+const { putItem } = require('../controllers/ControllerItem');
+const { deleteItem } = require('../controllers/ControllerItem');
 
 const routerItem = Router();
 
@@ -9,4 +13,4 @@ routerItem.post('/', postItem);
 routerItem.put('/:id', putItem);
 routerItem.delete('/:id', deleteItem);
 
-export default routerItem;
+module.exports = routerItem;

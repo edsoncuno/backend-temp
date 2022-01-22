@@ -1,5 +1,7 @@
-import Movimiento from '../models/Movimiento';
-import Item from '../models/Item';
+const Movimiento = require('../models/Movimiento');
+const Item = require('../models/Item');
+
+const controllerMovimiento = {};
 
 const formatearFecha = (date) => {
     let day = date.getDate();
@@ -13,7 +15,7 @@ const formatearFecha = (date) => {
     return day + '/' + month + '/' + date.getFullYear();
 };
 
-export const getMovimientos = async (req, res) => {
+controllerMovimiento.getMovimientos = async (req, res) => {
     try {
         let movimientos = await Movimiento.find().sort({ fecha_de_registro: -1 });
         let newMovimientos = [];
@@ -39,7 +41,7 @@ export const getMovimientos = async (req, res) => {
     }
 }
 
-export const getMovimiento = async (req, res) => {
+controllerMovimiento.getMovimiento = async (req, res) => {
     try {
         const movimiento = await Movimiento.findById({ _id: req.params.id });
         res.json(movimiento);
@@ -48,7 +50,7 @@ export const getMovimiento = async (req, res) => {
     }
 }
 
-export const postMovimiento = async (req, res) => {
+controllerMovimiento.postMovimiento = async (req, res) => {
     try {
         // obtener los datos
         // se supoe que he recivido los campos obligatorios
@@ -102,7 +104,7 @@ export const postMovimiento = async (req, res) => {
     }
 }
 
-export const putMovimiento = async (req, res) => {
+controllerMovimiento.putMovimiento = async (req, res) => {
     try {
         await Movimiento.findByIdAndUpdate(req.params.id, req.body);
         res.json({ error: false, name: 'Exito', message: 'Se edito el movimiento' });
@@ -110,3 +112,5 @@ export const putMovimiento = async (req, res) => {
         res.json({ error: true, name: error.name, message: error.message });
     }
 }
+
+module.exports = controllerMovimiento;

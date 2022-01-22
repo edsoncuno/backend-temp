@@ -1,7 +1,9 @@
-import Item from '../models/Item';
-import Movimiento from '../models/Movimiento';
+const Item = require('../models/Item');
+const Movimiento = require('../models/Movimiento');
 
-export const putStock = async (req, res) => {
+const controllerStock = {};
+
+controllerStock.putStock = async (req, res) => {
     try {
         await Item.findByIdAndUpdate(req.params.id, { stock: { cantidad: req.body.cantidad } });
         const item = await Item.findById(req.params.id);
@@ -22,3 +24,5 @@ export const putStock = async (req, res) => {
         res.json({ error: true, name: error.name, message: error.message });
     }
 }
+
+module.exports = controllerStock;

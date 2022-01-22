@@ -1,6 +1,8 @@
-import TipoDeItem from '../models/TipoDeItem';
+const TipoDeItem = require('../models/TipoDeItem');
 
-export const getTiposDeItem = async (req, res) => {
+const controllerTiposDeItem = {};
+
+controllerTiposDeItem.getTiposDeItem = async (req, res) => {
     try {
         const tiposDeItem = await TipoDeItem.find().sort({ nombre: 1 });
         res.json(tiposDeItem);
@@ -9,7 +11,7 @@ export const getTiposDeItem = async (req, res) => {
     }
 }
 
-export const getTipoDeItem = async (req, res) => {
+controllerTiposDeItem.getTipoDeItem = async (req, res) => {
     try {
         const tipoDeItem = await TipoDeItem.findById({ _id: req.params.id });
         res.json(tipoDeItem);
@@ -18,7 +20,7 @@ export const getTipoDeItem = async (req, res) => {
     }
 }
 
-export const postTipoDeItem = async (req, res) => {
+controllerTiposDeItem.postTipoDeItem = async (req, res) => {
     try {
         // recivo los datos con los campos obligatorios
         // nombre
@@ -38,7 +40,7 @@ export const postTipoDeItem = async (req, res) => {
     }
 }
 
-export const deleteTipoDeItem = async (req, res) => {
+controllerTiposDeItem.deleteTipoDeItem = async (req, res) => {
     try {
         await TipoDeItem.findByIdAndDelete({ _id: req.params.id });
         res.json({ error: false, name: 'Exito', message: 'Se elimino tipo de item' });
@@ -46,3 +48,5 @@ export const deleteTipoDeItem = async (req, res) => {
         res.json({ error: true, name: error.name, message: error.message })
     }
 }
+
+module.exports = controllerTiposDeItem;

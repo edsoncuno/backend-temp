@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { postTipoDeItem} from '../controllers/ControllerTipoDeItem';
-import { getTiposDeItem } from '../controllers/ControllerTipoDeItem';
-import { getTipoDeItem } from '../controllers/ControllerTipoDeItem';
-import { deleteTipoDeItem } from '../controllers/ControllerTipoDeItem';
+const { Router } = require('express');
+const { postTipoDeItem } = require('../controllers/ControllerTipoDeItem');
+const { getTiposDeItem } = require('../controllers/ControllerTipoDeItem');
+const { getTipoDeItem } = require('../controllers/ControllerTipoDeItem');
+const { deleteTipoDeItem } = require('../controllers/ControllerTipoDeItem');
 
 const routerTipoDeItem = Router();
 
@@ -11,4 +11,4 @@ routerTipoDeItem.get('/', getTiposDeItem);
 routerTipoDeItem.get('/:id', getTipoDeItem);
 routerTipoDeItem.delete('/:id', deleteTipoDeItem);
 
-export default routerTipoDeItem;
+module.exports = routerTipoDeItem;

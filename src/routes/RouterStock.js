@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { putStock } from '../controllers/ControllerStock';
+const { Router } = require('express');
+const { putStock } = require('../controllers/ControllerStock');
 
 const routerStock = Router();
 
 routerStock.put('/:id', putStock);
 
-export default routerStock;
+module.exports = routerStock;

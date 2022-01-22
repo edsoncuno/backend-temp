@@ -1,6 +1,8 @@
-import Item from '../models/Item';
+const Item = require('../models/Item');
 
-export const getItems = async (req, res) => {
+const controllerItem = {};
+
+controllerItem.getItems = async (req, res) => {
     try {
         const items = await Item.find().sort({ nombre: 1 });
         res.json(items);
@@ -9,7 +11,7 @@ export const getItems = async (req, res) => {
     }
 }
 
-export const getItem = async (req, res) => {
+controllerItem.getItem = async (req, res) => {
     try {
         const item = await Item.findById({ _id: req.params.id });
         res.json(item);
@@ -18,7 +20,7 @@ export const getItem = async (req, res) => {
     }
 }
 
-export const postItem = async (req, res) => {
+controllerItem.postItem = async (req, res) => {
     try {
         // recivo los datos con los campos obligatorios
         // nombre
@@ -54,7 +56,7 @@ export const postItem = async (req, res) => {
     }
 }
 
-export const putItem = async (req, res) => {
+controllerItem.putItem = async (req, res) => {
     try {
         const existeItemConElMismoNombre = await Item.findOne({ nombre: req.body.nombre });
         if (existeItemConElMismoNombre && req.params.id != existeItemConElMismoNombre._id) {
@@ -69,7 +71,7 @@ export const putItem = async (req, res) => {
     }
 }
 
-export const deleteItem = async (req, res) => {
+controllerItem.deleteItem = async (req, res) => {
     try {
         await Item.findByIdAndDelete({ _id: req.params.id });
         res.json({ error: false, name: 'Exito', message: 'Se elimino el item' });
@@ -77,3 +79,5 @@ export const deleteItem = async (req, res) => {
         res.json({ error: true, name: error.name, message: error.message })
     }
 }
+
+module.exports = controllerItem;

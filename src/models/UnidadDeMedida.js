@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema_unidad_de_medida = new mongoose.Schema({
     nombre: String
@@ -6,4 +6,4 @@ const schema_unidad_de_medida = new mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model('UnidadDeMedida', schema_unidad_de_medida);
+module.exports = mongoose.model('UnidadDeMedida', schema_unidad_de_medida);

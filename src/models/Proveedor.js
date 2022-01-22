@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema_proveedor = new mongoose.Schema({
     nombre: String
@@ -6,4 +6,4 @@ const schema_proveedor = new mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model('Proveedor', schema_proveedor);
+module.exports = mongoose.model('Proveedor', schema_proveedor);

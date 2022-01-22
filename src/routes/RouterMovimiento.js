@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { postMovimiento } from '../controllers/ControllerMovimiento';
-import { getMovimientos } from '../controllers/ControllerMovimiento';
-import { getMovimiento } from '../controllers/ControllerMovimiento';
-import { putMovimiento } from '../controllers/ControllerMovimiento';
+const { Router } = require('express');
+const { postMovimiento } = require('../controllers/ControllerMovimiento');
+const { getMovimientos } = require('../controllers/ControllerMovimiento');
+const { getMovimiento } = require('../controllers/ControllerMovimiento');
+const { putMovimiento } = require('../controllers/ControllerMovimiento');
 
 const routerMovimiento = Router();
 
@@ -11,4 +11,4 @@ routerMovimiento.get('/:id', getMovimiento);
 routerMovimiento.post('/', postMovimiento);
 routerMovimiento.put('/:id', putMovimiento);
 
-export default routerMovimiento;
+module.exports = routerMovimiento;

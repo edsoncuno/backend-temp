@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { postUnidadDeMedida} from '../controllers/ControllerUnidadDeMedida';
-import { getUnidadesDeMedida } from '../controllers/ControllerUnidadDeMedida';
-import { getUnidadDeMedida } from '../controllers/ControllerUnidadDeMedida';
-import { deleteUnidadDeMedida } from '../controllers/ControllerUnidadDeMedida';
+const { Router } = require('express');
+const { postUnidadDeMedida } = require('../controllers/ControllerUnidadDeMedida');
+const { getUnidadesDeMedida } = require('../controllers/ControllerUnidadDeMedida');
+const { getUnidadDeMedida } = require('../controllers/ControllerUnidadDeMedida');
+const { deleteUnidadDeMedida } = require('../controllers/ControllerUnidadDeMedida');
 
 const routerUnidadDeMedida = Router();
 
@@ -11,4 +11,4 @@ routerUnidadDeMedida.get('/', getUnidadesDeMedida);
 routerUnidadDeMedida.get('/:id', getUnidadDeMedida);
 routerUnidadDeMedida.delete('/:id', deleteUnidadDeMedida);
 
-export default routerUnidadDeMedida;
+module.exports = routerUnidadDeMedida;

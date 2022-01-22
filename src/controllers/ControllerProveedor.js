@@ -1,6 +1,8 @@
-import Proveedor from '../models/Proveedor';
+const Proveedor = require('../models/Proveedor');
 
-export const getProveedores = async (req, res) => {
+const controllerProveedor = {};
+
+controllerProveedor.getProveedores = async (req, res) => {
     try {
         const proveedores = await Proveedor.find().sort({ nombre: 1 });
         res.json(proveedores);
@@ -9,7 +11,7 @@ export const getProveedores = async (req, res) => {
     }
 }
 
-export const getProveedor = async (req, res) => {
+controllerProveedor.getProveedor = async (req, res) => {
     try {
         const proveedor = await Proveedor.findById({ _id: req.params.id });
         res.json(proveedor);
@@ -18,7 +20,7 @@ export const getProveedor = async (req, res) => {
     }
 }
 
-export const postProveedor = async (req, res) => {
+controllerProveedor.postProveedor = async (req, res) => {
     try {
         // recivo los datos con los campos obligatorios
         // nombre
@@ -38,7 +40,7 @@ export const postProveedor = async (req, res) => {
     }
 }
 
-export const deleteProveedor = async (req, res) => {
+controllerProveedor.deleteProveedor = async (req, res) => {
     try {
         await Proveedor.findByIdAndDelete({ _id: req.params.id });
         res.json({ error: false, name: 'Exito', message: 'Se elimino el proveedor' });
@@ -47,7 +49,7 @@ export const deleteProveedor = async (req, res) => {
     }
 }
 
-export const putProveedor = async (req, res) => {
+controllerProveedor.putProveedor = async (req, res) => {
     try {
         const existe = await Proveedor.findOne({ nombre: req.body.nombre });
         if (existe && !esElMismo(req.params.id, existe._id)) {
@@ -65,3 +67,5 @@ export const putProveedor = async (req, res) => {
 const esElMismo = (idProveedor1, idProveedor2) => {
     return idProveedor1 == idProveedor2;
 }
+
+module.exports = controllerProveedor;

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const schema_movimiento = new mongoose.Schema({
     tipo: String,
@@ -16,4 +16,4 @@ const schema_movimiento = new mongoose.Schema({
     versionKey: false
 });
 
-export default mongoose.model('Movimiento', schema_movimiento);
+module.exports = mongoose.model('Movimiento', schema_movimiento);

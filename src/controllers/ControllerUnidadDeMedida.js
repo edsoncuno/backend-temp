@@ -1,6 +1,8 @@
-import UnidadDeMedida from '../models/UnidadDeMedida';
+const UnidadDeMedida = require('../models/UnidadDeMedida');
 
-export const getUnidadesDeMedida = async (req, res) => {
+const controllerUnidadesDeMedida = {};
+
+controllerUnidadesDeMedida.getUnidadesDeMedida = async (req, res) => {
     try {
         const unidadesDeMedida = await UnidadDeMedida.find().sort({ nombre: 1 });
         res.json(unidadesDeMedida);
@@ -9,7 +11,7 @@ export const getUnidadesDeMedida = async (req, res) => {
     }
 }
 
-export const getUnidadDeMedida = async (req, res) => {
+controllerUnidadesDeMedida.getUnidadDeMedida = async (req, res) => {
     try {
         const unidadDeMedida = await UnidadDeMedida.findById({ _id: req.params.id });
         res.json(unidadDeMedida);
@@ -18,7 +20,7 @@ export const getUnidadDeMedida = async (req, res) => {
     }
 }
 
-export const postUnidadDeMedida = async (req, res) => {
+controllerUnidadesDeMedida.postUnidadDeMedida = async (req, res) => {
     try {
         // recivo los datos con los campos obligatorios
         // nombre
@@ -38,7 +40,7 @@ export const postUnidadDeMedida = async (req, res) => {
     }
 }
 
-export const deleteUnidadDeMedida = async (req, res) => {
+controllerUnidadesDeMedida.deleteUnidadDeMedida = async (req, res) => {
     try {
         await UnidadDeMedida.findByIdAndDelete({ _id: req.params.id });
         res.json({ error: false, name: 'Exito', message: 'Se elimino la unidad de medida' });
@@ -46,3 +48,5 @@ export const deleteUnidadDeMedida = async (req, res) => {
         res.json({ error: true, name: error.name, message: error.message })
     }
 }
+
+module.exports = controllerUnidadesDeMedida;
