@@ -1,7 +1,8 @@
 {
   "name": "backend-temp",
   "scripts": {
-    "start": "nodemon --exec npx babel-node src/index.js"
+    "start": "nodemon --exec npx babel-node src/index.js",
+    "build": "babel src/ --out-dir build"
   },
   "license": "ISC",
   "dependencies": {
@@ -16,6 +17,7 @@
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
+    "babel": "^6.23.0",
     "nodemon": "^2.0.15"
   }
 }
