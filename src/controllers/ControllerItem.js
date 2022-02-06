@@ -4,7 +4,7 @@ const controllerItem = {};
 
 controllerItem.getItems = async (req, res) => {
     try {
-        const items = await Item.find().sort({ nombre: 1 });
+        const items = await Item.find().sort({ categoria: 1 });
         res.json(items);
     } catch (error) {
         res.json({ error: true, name: error.name, message: error.message })
@@ -22,15 +22,37 @@ controllerItem.getItem = async (req, res) => {
 
 controllerItem.postItem = async (req, res) => {
     try {
-        // recivo los datos con los campos obligatorios
+        // recivo los datos en req.body
+        // valido los datos obligatorios
+        // categoria
+        // unidad de medida
         // nombre
-        // tipo
-        // unidad_de_medida
         const item = req.body;
-        // valido el nombre no sea usado
-        const existe = await Item.findOne({ nombre: item.nombre }).exec();
+        // valido categoria
+        // que exista y que no sea null
+        if (!item.categoria || item.categoria === null) {
+            const error = new Error('Seleccione una categoria');
+            error.name = 'La categoria es necesaria';
+            throw error;
+        }
+        // valido unidad de medida
+        // que exista y que no sea null
+        if (!item.unidadDeMedida || item.unidadDeMedida === null) {
+            const error = new Error('Seleccione una unidad de medida');
+            error.name = 'La unidad de medida es necesaria';
+            throw error;
+        }
+        // valido el nombre
+        // exista y que no este vacio
+        if (!item.nombre || item.nombre === '') {
+            const error = new Error('EL nombre del item no puede estar vacio');
+            error.name = 'El nombre es necesario';
+            throw error;
+        }
+        // valido de la existencia del item
+        const existe = await Item.findOne({ categoria: item.categoria, nombre: item.nombre });
         if (existe) {
-            const error = new Error('Existe un item con el mismo nombre');
+            const error = new Error('Existe un item con el mismo nombre y la misma categoria');
             error.name = 'El item ya existe';
             throw error;
         }
@@ -45,7 +67,7 @@ controllerItem.postItem = async (req, res) => {
             item.descripcion = '';
         }
         if (!item.stock) {
-            item.stock = { cantidad: 0 }
+            item.stock = 0;
         }
         // ahora guardo el item
         const newItem = new Item(item);
@@ -58,9 +80,32 @@ controllerItem.postItem = async (req, res) => {
 
 controllerItem.putItem = async (req, res) => {
     try {
-        const existeItemConElMismoNombre = await Item.findOne({ nombre: req.body.nombre });
-        if (existeItemConElMismoNombre && req.params.id != existeItemConElMismoNombre._id) {
-            const error = new Error('Existe un item con el mismo nombre');
+        const item = req.body;
+        // empiezo a validar los datos obligatorios
+        // valido categoria
+        // que exista y que no sea null
+        if (!item.categoria || item.categoria === null) {
+            const error = new Error('Seleccione una categoria');
+            error.name = 'La categoria es necesaria';
+            throw error;
+        }
+        // valido unidad de medida
+        // que exista y que no sea null
+        if (!item.unidadDeMedida || item.unidadDeMedida === null) {
+            const error = new Error('Seleccione una unidad de medida');
+            error.name = 'La unidad de medida es necesaria';
+            throw error;
+        }
+        // valido el nombre
+        // exista y que no este vacio
+        if (!item.nombre || item.nombre === '') {
+            const error = new Error('EL nombre del item no puede estar vacio');
+            error.name = 'El nombre es necesario';
+            throw error;
+        }
+        const existe = await Item.findOne({ categoria: item.categoria, nombre: item.nombre });
+        if (existe && req.params.id != existe._id) {
+            const error = new Error('Existe un item con el mismo nombre y la misma categoria');
             error.name = 'El item ya existe';
             throw error;
         }

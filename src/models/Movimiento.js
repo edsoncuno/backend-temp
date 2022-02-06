@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 
 const schema_movimiento = new mongoose.Schema({
-    tipo: String,
     item_id: String,
-    stock_actual: Number,
-    cantidad: Number,
+    categoria: String,
     nombre: String,
-    unidad_de_medida: String,
-    fecha_de_registro: Date,
+    unidadDeMedida: String,
+    //
+    tipo: String,
+    cantidad: Number,
+    descripcion: String,
+    precioDeCompraPorUnidad: Number,
     proveedor: String,
-    precio_de_compra_por_unidad: Number,
-    precio_de_compra_total: Number,
-    descripcion: String
+    //
+    fecha: Date,
+    stock: Number,
+    precioDeCompraTotal: Number
 }, {
     versionKey: false
 });

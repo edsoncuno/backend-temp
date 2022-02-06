@@ -8,12 +8,12 @@ const RouterMovimiento = require('./routes/RouterMovimiento');
 const RouterStock = require('./routes/RouterStock');
 const RouterProveedor = require('./routes/RouterProveedor');
 const RouterUnidadDeMedida = require('./routes/RouterUnidadDeMedida');
-const RouterTipoDeItem = require('./routes/RouterTipoDeItem');
+const routerCategoria = require('./routes/RouterCategoria');
 /**
  * Variables
  */
-const backend_port = 4000;
-const connection_string = 'mongodb://localhost/dt_temp';
+const backend_port = 5000;
+const connection_string = 'mongodb://localhost/db_temp';
 
 /**
  * DATABASE
@@ -42,7 +42,7 @@ app.use('/movimiento', RouterMovimiento);
 app.use('/stock', RouterStock);
 app.use('/proveedor', RouterProveedor);
 app.use('/unidadDeMedida', RouterUnidadDeMedida);
-app.use('/tipoDeItem', RouterTipoDeItem);
+app.use('/categoria', routerCategoria);
 
 /**
  * START
