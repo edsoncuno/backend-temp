@@ -9,6 +9,8 @@ const RouterStock = require('./routes/RouterStock');
 const RouterProveedor = require('./routes/RouterProveedor');
 const RouterUnidadDeMedida = require('./routes/RouterUnidadDeMedida');
 const routerCategoria = require('./routes/RouterCategoria');
+const routerCliente = require('./routes/cliente.router');
+const hanldeError = require('./middlewares/handleError.middleware');
 /**
  * Variables
  */
@@ -43,6 +45,9 @@ app.use('/stock', RouterStock);
 app.use('/proveedor', RouterProveedor);
 app.use('/unidadDeMedida', RouterUnidadDeMedida);
 app.use('/categoria', routerCategoria);
+app.use('/cliente', routerCliente);
+
+app.use(hanldeError);
 
 /**
  * START
