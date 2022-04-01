@@ -5,8 +5,7 @@ const soloContieneDigitos = (str) => {
 const validateDni = async (req, res, next) => {
     /**
      * validaciones para dni
-     * 
-     * eliminar posible espacios del string
+     *
      * debe tener un longitud de 8
      * debe ser contener solo digitos
      * (hay otras validaciones se deberan realizar con la api de la reniec o sunat)
@@ -14,15 +13,14 @@ const validateDni = async (req, res, next) => {
     if (!req.body.dni) {
         next();
     } else {
-        let dni = req.body.dni;
-        dni = dni.replace(/\s/igm, '')
-        if (dni.length !== 8) {
-            res.status(300);
-            res.json({ severity: 'info', summary: '', detail: 'El dni debe tener 8 caracteres' });
-        } else if (!soloContieneDigitos(dni)) {
+        if (!soloContieneDigitos(req.body.dni)) {
             res.status(300);
             res.json({ severity: 'info', summary: '', detail: 'El dni debe tener solo numeros' });
+        } else if (dni.length !== 8) {
+            res.status(300);
+            res.json({ severity: 'info', summary: '', detail: 'El dni debe tener 8 caracteres' });
         } else {
+            req.body.dni = String(dni);
             next();
         }
     }

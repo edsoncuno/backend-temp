@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const schema_item = new mongoose.Schema({
-    categoria: String,
+    categoriaId: { type: mongoose.Schema.Types.ObjectId, ref: 'Categoria' },
+    unidadDeMedidaId: { type: mongoose.Schema.Types.ObjectId, ref: 'UnidadDeMedida' },
     descripcion: String,
     marca: String,
     modelo: String,
     nombre: String,
-    unidadDeMedida: String,
     stock: Number
 }, {
     versionKey: false

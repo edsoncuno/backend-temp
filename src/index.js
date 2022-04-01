@@ -3,13 +3,16 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { connect } = require('mongoose');
 
-const RouterItem = require('./routes/RouterItem');
-const RouterMovimiento = require('./routes/RouterMovimiento');
-const RouterStock = require('./routes/RouterStock');
-const RouterProveedor = require('./routes/RouterProveedor');
-const RouterUnidadDeMedida = require('./routes/RouterUnidadDeMedida');
-const routerCategoria = require('./routes/RouterCategoria');
+const RouterItem = require('./routes/item.router');
+const RouterMovimiento = require('./routes/movimiento.router');
+const RouterStock = require('./routes/stock.router');
+const RouterProveedor = require('./routes/proveedor.router');
+const RouterUnidadDeMedida = require('./routes/unidadDeMedida.router');
+const routerCategoria = require('./routes/categoria.router');
 const routerCliente = require('./routes/cliente.router');
+const movimientoAjusteRouter = require('./routes/movimientoAjuste.router');
+const movimientoEntradaRouter = require('./routes/movimientoEntrada.router');
+const movimientoSalidaRouter = require('./routes/movimientoSalida.router');
 const hanldeError = require('./middlewares/handleError.middleware');
 /**
  * Variables
@@ -46,6 +49,9 @@ app.use('/proveedor', RouterProveedor);
 app.use('/unidadDeMedida', RouterUnidadDeMedida);
 app.use('/categoria', routerCategoria);
 app.use('/cliente', routerCliente);
+app.use('/movimientoAjuste', movimientoAjusteRouter);
+app.use('/movimientoEntrada', movimientoEntradaRouter);
+app.use('/movimientoSalida', movimientoSalidaRouter);
 
 app.use(hanldeError);
 
@@ -53,4 +59,4 @@ app.use(hanldeError);
  * START
  */
 app.listen(backend_port);
-console.log('The backend-temp server is listening on the port: ', backend_port);
+console.log(`The backend-temp server is listening on the port: http://localhost:${backend_port}/`);

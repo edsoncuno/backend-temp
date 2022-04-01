@@ -12,7 +12,7 @@ const formatearFecha = (date) => {
     if (month <= 9) {
         month = '0' + month;
     }
-    return day + '/' + month + '/' + date.getFullYear();
+    return day + '-' + month + '-' + date.getFullYear();
 };
 
 controllerMovimiento.getMovimientos = async (req, res) => {

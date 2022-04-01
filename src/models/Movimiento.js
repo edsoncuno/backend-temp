@@ -1,22 +1,14 @@
 const mongoose = require('mongoose');
 
-const schema_movimiento = new mongoose.Schema({
-    item_id: String,
-    categoria: String,
-    nombre: String,
-    unidadDeMedida: String,
-    //
-    tipo: String,
+const schema = new mongoose.Schema({
+    itemId: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' },
     cantidad: Number,
     descripcion: String,
-    precioDeCompraPorUnidad: Number,
-    proveedor: String,
-    //
     fecha: Date,
-    stock: Number,
-    precioDeCompraTotal: Number
+    nuevoStock: Number,
+    stock: Number
 }, {
     versionKey: false
 });
 
-module.exports = mongoose.model('Movimiento', schema_movimiento);
+module.exports = mongoose.model('Movimiento', schema);

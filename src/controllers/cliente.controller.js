@@ -1,5 +1,14 @@
 const Cliente = require('./../models/Cliente');
 
+const findById = async (id) => {
+    try {
+        const data = await Cliente.findById(id);
+        return data;
+    } catch (error) {
+        return null;
+    }
+}
+
 const findByDni = async (dni) => {
     try {
         if (dni == '') {
@@ -57,17 +66,32 @@ clienteController.eliminar = async (id) => {
 }
 
 clienteController.actualizar = async (id, cliente) => {
-    const data = await Cliente.findByIdAndUpdate(id, cliente);
-    // data es el documento que encuentra antes de actualizar
-    // si no encuentra el document con el id, se genera un error
-    // asi que hay que validar la existencia
-    return data;
+    try {
+        const data = await Cliente.findByIdAndUpdate(id, cliente);
+        return data;
+        // data es el documento que encuentra antes de actualizar
+        // si no encuentra el document con el id, se genera un error
+        // asi que hay que validar la existencia
+    } catch (error) {
+        return null;
+    }
 }
 
-clienteController.existe = async (dni, ruc) => {
+clienteController.existe = async (id, dni, ruc) => {
+    if (id) {
+        const data = await findById(id);
+        return (data != null) ? true : false;
+    } else {
+        const existe1 = await findByDni(dni);
+        const existe2 = await findByRuc(ruc);
+        return (existe1 != null || existe2 != null) ? true : false;
+    }
+}
+
+clienteController.existeOtro = async (id, dni, ruc) => {
     const existe1 = await findByDni(dni);
     const existe2 = await findByRuc(ruc);
-    if (existe1 != null || existe2 != null) {
+    if ((existe1 != null && existe1._id != id) || (existe2 != null && existe2._id != id)) {
         return true;
     } else {
         return false;
